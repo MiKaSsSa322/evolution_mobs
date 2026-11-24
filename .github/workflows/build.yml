@@ -2,9 +2,9 @@ name: Build Evolving Mobs
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
   workflow_dispatch:
 
 jobs:
@@ -24,14 +24,14 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.8'
+          gradle-version: '8.1.1'
 
-      - name: Build mod
-        working-directory: evolvingmobs
-        run: gradle build
+      - name: Build Evolving Mobs
+        run: gradle build --no-daemon
 
-      - name: Upload mod JAR
+      - name: Upload compiled mod
         uses: actions/upload-artifact@v4
         with:
-          name: EvolvingMobs-1.20.1
-          path: evolvingmobs/build/libs/*.jar
+          name: EvolvingMobs-1.20.1-Forge
+          path: build/libs/*.jar
+          if-no-files-found: error
